@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tool functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tool {CSTE}"><tr><td>tool {CSTE}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>tool functions</h2>
+
+<h3>Description</h3>
+
+<p>tool functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pu(x, beta)
+
+pu_inv(x, beta, u)
+
+normalize(x)
+
+logitinv(x)
+
+my_logit(x, y, off = NULL, beta = NULL, lam = 0, pen = 2)
+
+my_surv(x, y, atrisk, off = NULL, beta = NULL, lam = 0)
+
+prev_fit_cste(u1, u2, fit)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>numeric vector or matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>y, u, u1, u2, beta, atrisk</code></td>
+<td>
+<p>numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>off</code></td>
+<td>
+<p>numeric value, offset.</p>
+</td></tr>
+<tr valign="top"><td><code>lam</code></td>
+<td>
+<p>numeric value, penalty parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>pen</code></td>
+<td>
+<p>hyper-parameter that used in MCP and SCAD penalty functions.</p>
+</td></tr>
+<tr valign="top"><td><code>fit</code></td>
+<td>
+<p>a S3 class of cste.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>CSTE</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

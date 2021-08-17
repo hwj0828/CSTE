@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Solve the penalized logistic regression.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for penC {CSTE}"><tr><td>penC {CSTE}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Solve the penalized logistic regression.</h2>
+
+<h3>Description</h3>
+
+<p>Solve the penalized logistic regression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+penC(x, y, off, beta, lam, pen)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>samples of covariates which is a <i>n*p</i> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>samples of binary outcome which is a <i>n*1</i> vector.</p>
+</td></tr>
+<tr valign="top"><td><code>off</code></td>
+<td>
+<p>offset in logistic regression.</p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>initial estimates.</p>
+</td></tr>
+<tr valign="top"><td><code>lam</code></td>
+<td>
+<p>value of the lasso penalty parameter <i>&lambda;</i> for <i>&beta;_1</i> and <i>&beta;_2</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>pen</code></td>
+<td>
+<p>1: MCP estimator; 2: SCAD estimator.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>CSTE</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

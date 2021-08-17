@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select the optimal tuning parameters in CSTE estimation for...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for select_cste_surv {CSTE}"><tr><td>select_cste_surv {CSTE}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select the optimal tuning parameters in CSTE estimation for time to event outcome with right censoring.</h2>
+
+<h3>Description</h3>
+
+<p>select lasso penalty parameter <i>&lambda;</i> for <i>&beta;_1</i> and
+<i>&beta;_2</i> in CSTE estimation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+select_cste_surv(
+  x,
+  y,
+  z,
+  status = NULL,
+  lam_seq,
+  beta_ini = NULL,
+  nknots = 1,
+  max.iter = 2000,
+  eps = 0.001
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>samples of covariates which is a <i>n*p</i> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>samples of binary outcome which is a <i>n*1</i> vector.</p>
+</td></tr>
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>samples of treatment indicator which is a <i>n*1</i> vector.</p>
+</td></tr>
+<tr valign="top"><td><code>status</code></td>
+<td>
+<p>samples of censoring indicator which is a <i>n*1</i> vector. 
+Default value is NULL, indicating no censoring.</p>
+</td></tr>
+<tr valign="top"><td><code>lam_seq</code></td>
+<td>
+<p>a sequence for the choice of <i>&lambda;</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>beta_ini</code></td>
+<td>
+<p>initial values for <i>(&beta;_1', &beta;_2')'</i>, default value is NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>nknots</code></td>
+<td>
+<p>number of knots for the B-spline for estimating <i>g_1</i> and <i>g_2</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>max.iter</code></td>
+<td>
+<p>maximum iteration for the algorithm.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>numeric scalar <i>&ge;q</i> 0, the tolerance for the estimation 
+of <i>&beta;_1</i> and <i>&beta;_2</i>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list which includes
+</p>
+
+<ul>
+<li> <p><code>optimal</code>: optimal cste within the given the sequence of <i>&lambda;</i>.
+</p>
+</li>
+<li> <p><code>bic</code>: BIC for the sequence of <i>&lambda;</i>.
+</p>
+</li>
+<li> <p><code>lam_seq</code>: the sequence of <i>&lambda;</i> that is used.
+</p>
+</li></ul>
+
+
+
+<h3>References</h3>
+
+<p>Ma Y. and Zhou X. (2017). 
+Treatment selection in a randomized clinical trial via covariate-specific 
+treatment effect curves, <em>Statistical Methods in Medical Research</em>, 26(1), 124-141.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cste_surv.html">cste_surv</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>CSTE</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate the CSTE curve for time to event outcome with right...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cste_surv {CSTE}"><tr><td>cste_surv {CSTE}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate the CSTE curve for time to event outcome with right censoring.</h2>
+
+<h3>Description</h3>
+
+<p>Estimate the CSTE curve for time to event outcome with right censoring. 
+The working model 
+is </p>
+<p style="text-align: center;"><i>&lambda;(t| X, Z) = &lambda;_0(t) \exp(g_1(X&beta;_1)Z + g_2(X&beta;_2)),</i></p>
+
+<p>which implies that <i>CSTE(x) = g_1(x&beta;_1)</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cste_surv(
+  x,
+  y,
+  z,
+  status = NULL,
+  beta_ini = NULL,
+  lam = 0,
+  nknots = 2,
+  max.iter = 200,
+  eps = 0.001
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>samples of covariates which is a <i>n*p</i> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>samples of time to event which is a <i>n*1</i> vector.</p>
+</td></tr>
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>samples of treatment indicator which is a <i>n*1</i> vector.</p>
+</td></tr>
+<tr valign="top"><td><code>status</code></td>
+<td>
+<p>samples of censoring indicator which is a <i>n*1</i> vector, default value is NULL, indicating no censoring.</p>
+</td></tr>
+<tr valign="top"><td><code>beta_ini</code></td>
+<td>
+<p>initial values for <i>(&beta;_1', &beta;_2')'</i>, default value is NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>lam</code></td>
+<td>
+<p>value of the lasso penalty parameter <i>&lambda;</i> for <i>&beta;_1</i> and
+<i>&beta;_2</i>, default value is 0.</p>
+</td></tr>
+<tr valign="top"><td><code>nknots</code></td>
+<td>
+<p>number of knots for the B-spline for estimating <i>g_1</i> and <i>g_2</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>max.iter</code></td>
+<td>
+<p>maximum iteration for the algorithm.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>numeric scalar <i>&ge;q</i> 0, the tolerance for the estimation of <i>&beta;_1</i> and <i>&beta;_2</i>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A S3 class of cste, which includes:
+</p>
+
+<ul>
+<li> <p><code>beta1</code>: estimate of <i>&beta;_1</i>.
+</p>
+</li>
+<li> <p><code>beta2</code>: estimate of <i>&beta;_2</i>.
+</p>
+</li>
+<li> <p><code>B1</code>: the B-spline basis for estimating <i>g_1</i>.
+</p>
+</li>
+<li> <p><code>B2</code>: the B-spline basis for estimating <i>g_2</i>. 
+</p>
+</li>
+<li> <p><code>delta1</code>: the coefficient of B-spline for estimating <i>g_1</i>.
+</p>
+</li>
+<li> <p><code>delta2</code>: the coefficient for B-spline for estimating <i>g_2</i>.
+</p>
+</li>
+<li> <p><code>iter</code>: number of iteration.
+</p>
+</li>
+<li> <p><code>g1</code>: the estimate for <i>g_1(X&beta;_1)</i>.
+</p>
+</li>
+<li> <p><code>g2</code>: the estimate for <i>g_2(X&beta;_2)</i>. 
+</p>
+</li></ul>
+
+
+
+<h3>References</h3>
+
+<p>Ma Y. and Zhou X. (2017). 
+Treatment selection in a randomized clinical trial via covariate-specific 
+treatment effect curves, <em>Statistical Methods in Medical Research</em>, 26(1), 124-141.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cste_surv_PCI.html">cste_surv_PCI</a>, <a href="predict_cste_surv.html">predict_cste_surv</a>, <a href="select_cste_surv.html">select_cste_surv</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Quick example for the cste
+
+# --------  Example 1: Simulated Data ---------  # 
+## generate data 
+set.seed(100)
+X1 &lt;- runif(200,0,20)
+X2 &lt;- runif(200,0,20)
+X3 &lt;- runif(200,0,20)
+X &lt;- cbind(X1, X2, X3)
+Z &lt;- c(rep(1,100),rep(0,100))
+
+beta &lt;- c(0.3,0.4,0.5)
+lambda &lt;- 0.1 * exp(log(X%*%beta/10+0.6)*Z+(X%*%beta)/20)
+Time &lt;- -log(runif(200,0,1))/lambda
+C &lt;- runif(200,12,15)
+S &lt;- as.numeric(Time &lt;= C)
+Time &lt;- Time*S + C*(1-S)
+
+## estimate the CSTE curve
+fit &lt;- cste_surv(X, Time, Z, S, nknots=3, max.iter=200)
+
+## pointwise confidence interval (PCI)
+res &lt;- cste_surv_PCI(fit)
+
+## plot
+plot(res$or_x, res$fit_x, col = 'red', type = "l", 
+     xlim=c(8,18), ylim=c(-1,3), lwd = 2, 
+     ylab = "CSTE", xlab = "X * beta1",
+     main ="Pointwise Confidence interval")
+lines(res$or_x, res$lower_bound, lwd = 3, col = 'purple', lty = 2)
+lines(res$or_x, res$upper_bound, lwd = 3, col = 'purple', lty = 2)
+abline(h = 0, lty = 2, cex = 0.2)
+legend("topleft", legend = c("Estimates", "PCI"), 
+        lwd = c(2,3), lty = c(1, 2), col = c('red','purple'))
+# xb &lt;- sort(as.numeric(X%*%beta))
+# lines(xb, log(xb/10+0.6), type='l', col='blue')
+
+
+# --------  Example 2: Real Data ---------  # 
+dat &lt;- survival::lung
+
+## estimate the CSTE curve
+fit &lt;- cste_surv(dat[,6:8], dat$time, dat$sex, 
+                 dat$status, nknots = 3, max.iter = 100)
+                 
+## 95% pointwise confidence interval (PCI)
+res &lt;- cste_surv_PCI(fit)
+
+## plot
+plot(res$or_x, res$fit_x, col = 'red', type = "l", lwd = 2, ylim = c(-5,2),
+     ylab = "CSTE", xlab = "X * beta1", main ="Pointwise Confidence interval")
+lines(res$or_x, res$lower_bound, lwd = 3, col = 'purple', lty = 2)
+lines(res$or_x, res$upper_bound, lwd = 3, col = 'purple', lty = 2)
+abline(h = 0, lty = 2, cex = 0.2)
+legend("topleft", legend = c("Estimates", "PCI"), 
+        lwd = c(2,3), lty = c(1, 2), col = c('red','purple'))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>CSTE</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
