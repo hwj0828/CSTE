@@ -1,0 +1,16 @@
+Package: CSTE
+Type: Package
+Title: Covariate Specific Treatment Effect (CSTE) Curve
+Version: 1.0
+Date: 2021-08-17
+Author: Peng Wu, Wenjie Hu, Yuhao Deng, Xiaohua Zhou
+Maintainer: Wenjie Hu <huwenjie@pku.edu.cn>
+Description: Estimate the CSTE curve and its confidence intervals.
+License: GPL (>= 2)
+Encoding: UTF-8
+Imports: Rcpp (>= 1.0.4), fda, splines, survival
+LinkingTo: Rcpp
+RoxygenNote: 7.1.1
+Suggests: mvtnorm, sigmoid
+NeedsCompilation: yes
+Packaged: 2021-08-17 08:09:56 UTC; hwj
