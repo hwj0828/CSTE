@@ -19,6 +19,9 @@ penC(x, y, off, beta, lam, pen)
 
 \item{pen}{1: MCP estimator; 2: SCAD estimator.}
 }
+\value{
+A numeric vector, estimate of beta
+}
 \description{
 Solve the penalized logistic regression.
 }

@@ -65,7 +65,6 @@
 #' fit <- cste_bin(X, Y, Z)
 #' 
 #' ## plot 
-#' par(mar = c(5,5,2,2))
 #' plot(mu1, g1, cex = 0.5, xlim = c(-2,2), ylim = c(-8, 3), 
 #'      xlab = expression(X*beta), ylab = expression(g1(X*beta)))
 #'      ord <- order(mu1)
@@ -75,7 +74,6 @@
 #' res <- cste_bin_SCB(X, fit, alpha = 0.05)
 #' 
 #' ## plot 
-#' par(mar = c(5, 5, 3,2))
 #' plot(res$or_x, res$fit_x, col = 'red', 
 #'      type="l", lwd=2, lty = 3, ylim = c(-10,8),
 #'      ylab=expression(g1(X*beta)), xlab = expression(X*beta), 
@@ -108,7 +106,6 @@
 #' res <- cste_bin_SCB(X, fit)  
 #' 
 #' ## plot 
-#' par(mar = c(5, 5, 3,2))
 #' plot(res$or_x, res$fit_x, col = 'red', type="l", lwd=2, 
 #'      lty = 3, xlim = c(0, 1), ylim = c(-4, 4), 
 #'      ylab=expression(g1(X)), xlab = expression(X), 

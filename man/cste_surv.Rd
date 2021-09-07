@@ -57,62 +57,40 @@ is \deqn{\lambda(t| X, Z) = \lambda_0(t) \exp(g_1(X\beta_1)Z + g_2(X\beta_2)),}
 which implies that \eqn{CSTE(x) = g_1(x\beta_1)}.
 }
 \examples{
-## Quick example for the cste
+## Quick example for the cste 
 
-# --------  Example 1: Simulated Data ---------  # 
 ## generate data 
-set.seed(100)
+set.seed(313)
 X1 <- runif(200,0,20)
 X2 <- runif(200,0,20)
-X3 <- runif(200,0,20)
-X <- cbind(X1, X2, X3)
+X <- cbind(X1, X2)
 Z <- c(rep(1,100),rep(0,100))
 
-beta <- c(0.3,0.4,0.5)
+beta <- c(0.3,0.4)
 lambda <- 0.1 * exp(log(X\%*\%beta/10+0.6)*Z+(X\%*\%beta)/20)
 Time <- -log(runif(200,0,1))/lambda
 C <- runif(200,12,15)
 S <- as.numeric(Time <= C)
 Time <- Time*S + C*(1-S)
-
 ## estimate the CSTE curve
 fit <- cste_surv(X, Time, Z, S, nknots=3, max.iter=200)
-
 ## pointwise confidence interval (PCI)
 res <- cste_surv_PCI(fit)
 
 ## plot
 plot(res$or_x, res$fit_x, col = 'red', type = "l", 
-     xlim=c(8,18), ylim=c(-1,3), lwd = 2, 
+     xlim=c(5,12), ylim=c(-1,2), lwd = 2, 
      ylab = "CSTE", xlab = "X * beta1",
      main ="Pointwise Confidence interval")
 lines(res$or_x, res$lower_bound, lwd = 3, col = 'purple', lty = 2)
 lines(res$or_x, res$upper_bound, lwd = 3, col = 'purple', lty = 2)
 abline(h = 0, lty = 2, cex = 0.2)
 legend("topleft", legend = c("Estimates", "PCI"), 
-        lwd = c(2,3), lty = c(1, 2), col = c('red','purple'))
-# xb <- sort(as.numeric(X\%*\%beta))
-# lines(xb, log(xb/10+0.6), type='l', col='blue')
-
-
-# --------  Example 2: Real Data ---------  # 
-dat <- survival::lung
-
-## estimate the CSTE curve
-fit <- cste_surv(dat[,6:8], dat$time, dat$sex, 
-                 dat$status, nknots = 3, max.iter = 100)
-                 
-## 95\% pointwise confidence interval (PCI)
-res <- cste_surv_PCI(fit)
-
-## plot
-plot(res$or_x, res$fit_x, col = 'red', type = "l", lwd = 2, ylim = c(-5,2),
-     ylab = "CSTE", xlab = "X * beta1", main ="Pointwise Confidence interval")
-lines(res$or_x, res$lower_bound, lwd = 3, col = 'purple', lty = 2)
-lines(res$or_x, res$upper_bound, lwd = 3, col = 'purple', lty = 2)
-abline(h = 0, lty = 2, cex = 0.2)
-legend("topleft", legend = c("Estimates", "PCI"), 
-        lwd = c(2,3), lty = c(1, 2), col = c('red','purple'))
+       lwd = c(2,3), lty = c(1, 2), col = c('red','purple'))
+       
+## True CSTE curve       
+xb <- sort(as.numeric(X\%*\%beta))
+lines(xb, log(xb/10+0.6), type='l', col='blue')
 
 }
 \references{

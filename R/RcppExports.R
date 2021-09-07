@@ -8,6 +8,7 @@
 #' @param pen 1: MCP estimator; 2: SCAD estimator.
 #' @param lam value of the lasso penalty parameter \eqn{\lambda} for \eqn{\beta_1} and \eqn{\beta_2}.
 #' @param beta initial estimates.
+#' @return A numeric vector, estimate of beta
 #' @export 
 penC <- function(x, y, off, beta, lam, pen) {
     .Call('_CSTE_penC', PACKAGE = 'CSTE', x, y, off, beta, lam, pen)

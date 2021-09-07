@@ -66,6 +66,7 @@ double cross(NumericMatrix x, NumericVector w, NumericVector r, int j, double in
 //' @param pen 1: MCP estimator; 2: SCAD estimator.
 //' @param lam value of the lasso penalty parameter \eqn{\lambda} for \eqn{\beta_1} and \eqn{\beta_2}.
 //' @param beta initial estimates.
+//' @return A numeric vector, estimate of beta
 //' @export 
 // [[Rcpp::export]]
 NumericVector penC(NumericMatrix x, NumericVector y, NumericVector off, NumericVector beta, double lam, double pen) {

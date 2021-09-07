@@ -38,6 +38,9 @@ prev_fit_cste(u1, u2, fit)
 
 \item{fit}{a S3 class of cste.}
 }
+\value{
+Intermediate results.
+}
 \description{
 tool functions
 }

@@ -7,6 +7,7 @@
 #' @param lam numeric value, penalty parameter.
 #' @param pen hyper-parameter that used in MCP and SCAD penalty functions.
 #' 
+#' @return Intermediate results.
 #' @name tool
 #' @keywords internal
 NULL

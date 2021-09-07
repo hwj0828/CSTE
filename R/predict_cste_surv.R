@@ -36,8 +36,8 @@ predict_cste_surv <- function(obj, newx, alpha = 0.05) {
     matched <- sapply(eta, function(xx) which.min(abs(xx-eta.fit)))
     confidence_interval <- cste_surv_PCI(obj, alpha = 0.05)
     out <- as.numeric(confidence_interval$fit_x[matched,])
-    L <- as.numeric(confidence_interval$lower_bound[matched,])
-    U <- as.numeric(confidence_interval$upper_bound[matched,])
+    L <- as.numeric(confidence_interval$lower_bound[matched])
+    U <- as.numeric(confidence_interval$upper_bound[matched])
   }
   return(list(g1 = out, lower_bound = L, upper_bound = U))
 }
