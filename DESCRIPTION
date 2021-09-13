@@ -23,7 +23,7 @@ LinkingTo: Rcpp
 RoxygenNote: 7.1.1
 Suggests: mvtnorm, sigmoid
 NeedsCompilation: yes
-Packaged: 2021-09-03 10:05:13 UTC; hwj
+Packaged: 2021-09-13 05:04:41 UTC; hwj
 Author: Peng Wu [aut],
   Wenjie Hu [aut, cre],
   Yuhao Deng [aut],
