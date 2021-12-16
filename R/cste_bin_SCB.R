@@ -6,6 +6,7 @@
 #' 
 #'@param x samples of predictor, which is a \eqn{m*p} matrix.
 #'@param fit a S3 class of cste.
+#'@param h kernel bandwidth.
 #'@param alpha the simultaneous confidence bands are of \eqn{1-\alpha} confidence level.
 #'
 #'@return A list which includes:
@@ -27,14 +28,15 @@
 #' 
 #' @seealso \code{\link{cste_bin}}
 
-cste_bin_SCB <- function(x, fit, alpha = 0.05){
+cste_bin_SCB <- function(x, fit, h = NULL, alpha = 0.05){
   u1 <- pu(x, fit$beta1)$u
   u2 <- pu(x, fit$beta2)$u
   sbk <- prev_fit_cste(u1, u2, fit)
-  # optimal bandwidth 
-  # h <- sbk$h * (log(sbk$n))^(-0.25)
-  h <- sbk$h
-  h <- 0.006
+  if(is.null(h)){
+    # optimal bandwidth 
+    # h <- sbk$h * (log(sbk$n))^(-0.25)
+    h <- sbk$h    
+  }
   newx <- seq(min(u1)+h, max(u1)-h, length = 100)
   fit.x <- sapply(newx, function(xx) coef(glm(sbk$y~1, weights=dnorm((xx - sbk$u1)/h)/h ,
                         family=quasibinomial(link = "logit"), offset=sbk$fit_g2)))

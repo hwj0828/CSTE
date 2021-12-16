@@ -4,12 +4,14 @@
 \alias{cste_bin_SCB}
 \title{Calculate simultaneous confidence bands of CSTE curve for binary outcome.}
 \usage{
-cste_bin_SCB(x, fit, alpha = 0.05)
+cste_bin_SCB(x, fit, h = NULL, alpha = 0.05)
 }
 \arguments{
 \item{x}{samples of predictor, which is a \eqn{m*p} matrix.}
 
 \item{fit}{a S3 class of cste.}
+
+\item{h}{kernel bandwidth.}
 
 \item{alpha}{the simultaneous confidence bands are of \eqn{1-\alpha} confidence level.}
 }
